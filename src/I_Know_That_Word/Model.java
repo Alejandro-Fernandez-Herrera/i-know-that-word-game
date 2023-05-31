@@ -94,6 +94,11 @@ public class Model {
         }
         return palabrasLevel;
     }
+
+    /**
+     * Selecciona las palabras que se van a usar en el level
+     * @return
+     */
     public ArrayList<String> getArrayPalabrasLevel(){
         for ( int i = 0; i < palabrasLevel; i++){
             int seleccionador = (int)(Math.random() * bancoPalabras.size());
@@ -107,8 +112,62 @@ public class Model {
         return arrayPalabrasLevel;
     }
 
+    /**
+     *define las palabras correctas para el nivel
+     * @return
+     */
+
+    public ArrayList<String> getArrayPalabrasMemorizar() {
+
+        for (int i = 0; i < palabrasLevel / 2; i++) {
+            int auxiliar = (int) (Math.random() * arrayPalabrasLevel.size());
+            if (!arrayPalabrasVistas.contains(arrayPalabrasLevel.get(auxiliar))) {
+                arrayPalabrasVistas.add(arrayPalabrasLevel.get(auxiliar));
+            } else {
+                i = i - 1;
+            }
+        }
+        return arrayPalabrasVistas;
+    }
+
+    /**
+     * Verifica si la palabra se encuentra en el level
+     * @param palabra
+     * @return
+     */
+
+    public boolean palabraEstaEnNivel(String palabra) {
+
+        if (arrayPalabrasVistas.contains(palabra)) {
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    /**
+     * calcula el porcentaje de acierto
+     * @return
+     */
 
 
 
+    public int calcularPorcentaje() {
 
+        porcentaje = (aciertos * 100) / palabrasLevel;
+
+        return porcentaje;
+    }
+
+    /**
+     * Calcula si se superó el nivel
+     * @return
+     */
+    public boolean LevelSucess() {
+        if (porcentaje >= aciertosNecesarios) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
