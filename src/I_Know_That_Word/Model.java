@@ -14,7 +14,7 @@ public class Model {
     /**
      * constructor
      */
-    public Model(){
+    public Model() {
 
         palabra = new Palabras();
         palabrasLevel = 0;
@@ -26,15 +26,15 @@ public class Model {
         bancoPalabras = new ArrayList<String>();
         arrayPalabrasLevel = new ArrayList<String>();
         arrayPalabrasVistas = new ArrayList<String>();
-        bancoPalabras = new palabra.getPalabras();
+        bancoPalabras = palabra.getPalabras();
 
     }
 
     /**
-     *metodos
+     * metodos
      */
-    public int nivelPalabras (int nivelxJugar){
-        switch (nivelxJugar){
+    public int nivelPalabras(int nivelxJugar) {
+        switch (nivelxJugar) {
             case 1:
                 palabrasVistas = 10;
                 palabrasLevel = 20;
@@ -85,11 +85,11 @@ public class Model {
                 palabrasLevel = 200;
                 aciertosNecesarios = 100;
                 break;
-                /**default:
-                JOptionPane.showMessageDialog(null, "Error de sistema.");
-                System.exit(0);
-                break;
-                 */
+            /**default:
+             JOptionPane.showMessageDialog(null, "Error de sistema.");
+             System.exit(0);
+             break;
+             */
 
         }
         return palabrasLevel;
@@ -97,15 +97,15 @@ public class Model {
 
     /**
      * Selecciona las palabras que se van a usar en el level
+     *
      * @return
      */
-    public ArrayList<String> getArrayPalabrasLevel(){
-        for ( int i = 0; i < palabrasLevel; i++){
-            int seleccionador = (int)(Math.random() * bancoPalabras.size());
+    public ArrayList<String> getArrayPalabrasLevel() {
+        for (int i = 0; i < palabrasLevel; i++) {
+            int seleccionador = (int) (Math.random() * bancoPalabras.size());
             if (!arrayPalabrasLevel.contains(bancoPalabras.get(seleccionador))) {
                 arrayPalabrasLevel.add(bancoPalabras.get(seleccionador));
-            }
-            else {
+            } else {
                 i = i - 1;
             }
         }
@@ -113,7 +113,8 @@ public class Model {
     }
 
     /**
-     *define las palabras correctas para el nivel
+     * define las palabras correctas para el nivel
+     *
      * @return
      */
 
@@ -132,6 +133,7 @@ public class Model {
 
     /**
      * Verifica si la palabra se encuentra en el level
+     *
      * @param palabra
      * @return
      */
@@ -140,16 +142,16 @@ public class Model {
 
         if (arrayPalabrasVistas.contains(palabra)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     /**
      * calcula el porcentaje de acierto
+     *
      * @return
      */
-
 
 
     public int calcularPorcentaje() {
@@ -161,6 +163,7 @@ public class Model {
 
     /**
      * Calcula si se superó el nivel
+     *
      * @return
      */
     public boolean LevelSucess() {
@@ -171,3 +174,5 @@ public class Model {
         }
     }
 }
+
+
