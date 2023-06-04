@@ -3,7 +3,10 @@ package I_Know_That_Word;
 import javax.swing.*;
 import java.awt.*;
 
-
+/**
+ * This class is a kind of JLabel used to create a personalized Header for the project
+ *
+ */
 public class Header extends JLabel {
     /**
      * Constructor of the Header class
