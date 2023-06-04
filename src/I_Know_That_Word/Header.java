@@ -1,4 +1,4 @@
-package fileManager;
+package I_Know_That_Word;
 
 import javax.swing.*;
 import java.awt.*;
