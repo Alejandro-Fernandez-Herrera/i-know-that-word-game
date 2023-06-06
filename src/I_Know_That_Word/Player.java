@@ -2,7 +2,10 @@ package I_Know_That_Word; // This is the package where the class is located
 
 import java.io.*; // Import the java.io package to use the FileWriter and BufferedWriter classes
 import java.util.ArrayList; // Import the java.util package to use the ArrayList class
-
+import javax.sound.midi.SysexMessage;
+import javax.swing.*;
+import java.io.*;
+import java.util.ArrayList;
 /**
  * This class handles actions related to the player
  */
@@ -22,7 +25,7 @@ public class Player {
         FileManager fileManager = new FileManager(); // This object is used to read files
         //TODO: CREATE FILEMANAGER CLASS TO READFILE
         userList = fileManager.readFile("Players.txt"); // This method is in the FileManager class
-        levelList = fileManager.readFile("words.txt"); // This method is in the FileManager class
+        levelList = fileManager.readFile("fileText.txt"); // This method is in the FileManager class
         position = 0; // This variable stores the position of the player in the ArrayList
         username = ""; // This variable stores the username
         level = 1; // This variable stores the level
@@ -72,7 +75,7 @@ public class Player {
      */
     public void registerPlayer(String name, int levelCleared) {
         try {
-            fileWriter = new FileWriter("src/I_Know_That_Word/files/Players.txt", true); // This method is in the FileWriter class
+            fileWriter = new FileWriter("src/I_Know_That_Word/files/fileText.txt", true); // This method is in the FileWriter class
             output = new BufferedWriter(fileWriter);
             output.newLine();
             output.write(name);
@@ -87,7 +90,7 @@ public class Player {
         }
 
         try {
-            fileWriter = new FileWriter("src/I_Know_That_Word/files/data.txt", true);
+            fileWriter = new FileWriter("src/I_Know_That_Word/files/fileText.txt", true);
             output = new BufferedWriter(fileWriter);
             output.newLine();
             output.write(String.valueOf(levelCleared));
