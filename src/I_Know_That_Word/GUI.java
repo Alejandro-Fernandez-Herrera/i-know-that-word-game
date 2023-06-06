@@ -47,11 +47,12 @@ public class GUI extends JFrame {
         //Default JFrame configuration
         this.setTitle("I KNOW THAT WORD!");
         this.setSize(300,300);
-        //this.pack();
+        this.pack();
         this.setResizable(true);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
     }
 
     /**
@@ -106,14 +107,14 @@ public class GUI extends JFrame {
             start.setPreferredSize(new Dimension(500, 360));
             constraints.gridx = 0;
             constraints.gridy = 1;
-            constraints.gridwidth = 3;
+            constraints.gridwidth = 1;
             constraints.fill = GridBagConstraints.BOTH;
             constraints.anchor = GridBagConstraints.LINE_START;
             imageStart = new ImageIcon(this.getClass().getResource(""));
             JLabel picLabel = new JLabel(imageStart);
             start.add(picLabel);
 
-            play = new JButton("Jugar");
+            play = new JButton("Play");
             play.addActionListener(escucha);
             start.add(play);
 
@@ -122,14 +123,14 @@ public class GUI extends JFrame {
         //PANEL NOMBRE USUARIO
 
         {
+
             playerNameu = new JPanel();
             playerNameu.setBackground(Color.CYAN);
             playerNameu.setPreferredSize(new Dimension(500, 120));
             constraints.gridx = 0;
             constraints.gridy = 2;
-            constraints.gridwidth = 4;
+            constraints.gridwidth = 3;
             constraints.anchor = GridBagConstraints.PAGE_START;
-
             this.add(playerNameu, constraints);
 
             playerNameC = new JPanel();
@@ -137,13 +138,12 @@ public class GUI extends JFrame {
             playerNameC.setPreferredSize(new Dimension(500, 120));
             constraints.gridx = 0;
             constraints.gridy = 3;
-            constraints.gridwidth = 4;
+            constraints.gridwidth = 3;
             constraints.anchor = GridBagConstraints.CENTER;
 
             this.add(playerNameC, constraints);
 
             user = new JLabel("Enter your name");
-
             name = new JTextField(30);
 
             playerNameC.add(user);
@@ -154,7 +154,7 @@ public class GUI extends JFrame {
             playerNameB.setPreferredSize(new Dimension(500, 120));
             constraints.gridx = 0;
             constraints.gridy = 4;
-            constraints.gridwidth = 4;
+            constraints.gridwidth = 3;
             constraints.anchor = GridBagConstraints.PAGE_END;
 
             this.add(playerNameB, constraints);
@@ -163,6 +163,58 @@ public class GUI extends JFrame {
             done.addActionListener(escucha);
 
             playerNameB.add(done);
+/**
+            playerNameu = new JPanel();
+            playerNameu.setBackground(Color.CYAN);
+            playerNameu.setPreferredSize(new Dimension(500, 120));
+            constraints.gridx = 0;
+            constraints.gridy = 2;
+            constraints.gridwidth = 3;
+            constraints.anchor = GridBagConstraints.PAGE_START;
+            this.add(playerNameu, constraints);
+
+            playerNameC = new JPanel();
+            playerNameC.setBackground(Color.CYAN);
+            playerNameC.setPreferredSize(new Dimension(500, 120));
+            constraints.gridx = 0;
+            constraints.gridy = 3;
+            constraints.gridwidth = 3;
+            constraints.anchor = GridBagConstraints.CENTER;
+            this.add(playerNameC, constraints);
+
+            user = new JLabel("Enter your name");
+            name = new JTextField(30);
+
+// Crear nuevas restricciones para los componentes de playerNameC
+            GridBagConstraints playerNameCConstraints = new GridBagConstraints();
+            playerNameCConstraints.gridx = 0;
+            playerNameCConstraints.gridy = 0;
+            playerNameCConstraints.anchor = GridBagConstraints.CENTER;
+            playerNameC.add(user, playerNameCConstraints);
+
+            playerNameCConstraints.gridy = 1;
+            playerNameC.add(name, playerNameCConstraints);
+
+            playerNameB = new JPanel();
+            playerNameB.setBackground(Color.CYAN);
+            playerNameB.setPreferredSize(new Dimension(500, 120));
+            constraints.gridx = 0;
+            constraints.gridy = 4;
+            constraints.gridwidth = 3;
+            constraints.anchor = GridBagConstraints.PAGE_END;
+            this.add(playerNameB, constraints);
+
+            done = new JButton("Done");
+            done.addActionListener(escucha);
+
+// Crear nuevas restricciones para el botón en playerNameB
+            GridBagConstraints playerNameBConstraints = new GridBagConstraints();
+            playerNameBConstraints.gridx = 0;
+            playerNameBConstraints.gridy = 0;
+            playerNameBConstraints.anchor = GridBagConstraints.PAGE_END;
+            playerNameB.add(done, playerNameBConstraints);
+             */
+
         }
 
         //PANEL MOSTRAR ESTADO
@@ -418,6 +470,7 @@ public class GUI extends JFrame {
             EventQueue.invokeLater(() ->
             {
                 GUI gui = new GUI();
+                gui.pack();
             });
         }
 
