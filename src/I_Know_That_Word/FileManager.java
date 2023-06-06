@@ -16,7 +16,7 @@ public class FileManager {
     public ArrayList<String> readFile(String file) {
         ArrayList<String> list = new ArrayList<String>();
 
-        String PATH = "src/myProject/files/" + file;
+        String PATH = "src/I_Know_That_Word/files" + file;
 
         try {
             fileReader = new FileReader(PATH);
