@@ -7,7 +7,7 @@ public class Palabras {
 
     public Palabras(){
         FileManager fileManager = new FileManager();
-        banco = fileManager.readFile("src/I_Know_That_Word/files/data.txt");
+        banco = fileManager.readFile("words.txt");
     }
 
 

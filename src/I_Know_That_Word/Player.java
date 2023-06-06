@@ -21,8 +21,8 @@ public class Player {
     public Player() { // This method is called when a Player object is created
         FileManager fileManager = new FileManager(); // This object is used to read files
         //TODO: CREATE FILEMANAGER CLASS TO READFILE
-        userList = fileManager.readFile("src/I_Know_That_Word/files/Players.txt"); // This method is in the FileManager class
-        levelList = fileManager.readFile("src/I_Know_That_Word/files/data.txt"); // This method is in the FileManager class
+        userList = fileManager.readFile("Players.txt"); // This method is in the FileManager class
+        levelList = fileManager.readFile("words.txt"); // This method is in the FileManager class
         position = 0; // This variable stores the position of the player in the ArrayList
         username = ""; // This variable stores the username
         level = 1; // This variable stores the level
