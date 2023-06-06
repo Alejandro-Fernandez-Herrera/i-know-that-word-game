@@ -17,8 +17,8 @@ import java.util.ArrayList;
 public class GUI extends JFrame {
 
     private Header headerProject;
-    private JTextField text,name;
-    private JTextArea textArea;
+    private JTextField name;
+
     private FileManager fileManager;
     private Escucha escucha;
     private Player player;
@@ -109,7 +109,7 @@ public class GUI extends JFrame {
             constraints.gridwidth = 3;
             constraints.fill = GridBagConstraints.BOTH;
             constraints.anchor = GridBagConstraints.LINE_START;
-            imageStart = new ImageIcon(this.getClass().getResource("/myProject/archivos/imagenInicio.png"));
+            imageStart = new ImageIcon(this.getClass().getResource(""));
             JLabel picLabel = new JLabel(imageStart);
             start.add(picLabel);
 

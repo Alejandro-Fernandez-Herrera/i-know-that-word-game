@@ -51,7 +51,8 @@ public class Player {
     /**
      * Returns the username
      */
-    public String getName() {
+    public String getName()
+    {
         return username; // This variable stores the username
     }
 
