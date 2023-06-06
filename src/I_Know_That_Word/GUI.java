@@ -23,35 +23,36 @@ public class GUI extends JFrame {
     private Escucha escucha;
     private Player player;
     private Model model;
-    private JPanel resultScreenIn,upper,start,playerNameu,playerNameC,playerNameB,level,panelShowWordsU,resultScreenCe,panelShowWordsC,panelShowWordsB,selectWordsU,resultScreenSu,selectWordsC,selectWordsB;
-    private JButton helpButton, exitButton, play, done,continueGame,showWords,yesButton,noButton,restartLevelButton,nextLevelButton;
+    private JPanel resultScreenIn, upper, start, playerNameu, playerNameC, playerNameB, level, panelShowWordsU, resultScreenCe, panelShowWordsC, panelShowWordsB, selectWordsU, resultScreenSu, selectWordsC, selectWordsB;
+    private JButton helpButton, exitButton, play, done, continueGame, showWords, yesButton, noButton, restartLevelButton, nextLevelButton;
     private ImageIcon imageStart;
-    private JLabel user,showName,showActualLevel,showHits,showWord,selectWords,statisticsLabel;
+    private JLabel user, showName, showActualLevel, showHits, showWord, selectWords, statisticsLabel;
     private String userName = null;
     private int actualLevel = 1;
     private JTextPane resultTextPane;
-    private Timer showTimer,selectTimer;
+    private Timer showTimer, selectTimer;
     private int maximumLevelPassed = 0;
     private String word;
     private ArrayList<String> palabrasLevel, palabrasVistas;
     private int successPercentage = 0;
     private Object args;
+    private Palabras palabras;
 
     /**
      * Constructor of GUI class
      */
-    public GUI()
-    {
+    public GUI() {
         initGUI();
 
         //Default JFrame configuration
         this.setTitle("I KNOW THAT WORD!");
-        this.setSize(300,300);
+        this.setSize(300, 300);
         this.pack();
-        this.setResizable(true);
+        this.setResizable(false);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setBackground(Color.CYAN);
 
     }
 
@@ -59,13 +60,13 @@ public class GUI extends JFrame {
      * This method is used to set up the default JComponent Configuration,
      * create Listener and control Objects used for the GUI class
      */
-    private void initGUI()
-    {
+    private void initGUI() {
         //Set up JFrame Container's Layout
         this.getContentPane().setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         this.setUndecorated(true);
         //Create Listener Object and Control Object
+        palabras = new Palabras();
         escucha = new Escucha();
         fileManager = new FileManager();
         player = new Player();
@@ -83,7 +84,7 @@ public class GUI extends JFrame {
             constraints.fill = GridBagConstraints.HORIZONTAL;
             constraints.anchor = GridBagConstraints.LINE_START;
 
-            helpButton = new JButton("?");
+            helpButton = new JButton("HELP");
             helpButton.setPreferredSize(new Dimension(65, 30));
 
             helpButton.addActionListener(escucha);
@@ -93,7 +94,7 @@ public class GUI extends JFrame {
             headerProject.setPreferredSize(new Dimension(350, 30));
             upper.add(headerProject);
 
-            exitButton = new JButton("Salir");
+            exitButton = new JButton("EXIT");
             exitButton.setPreferredSize(new Dimension(65, 30));
             exitButton.addActionListener(escucha);
             upper.add(exitButton);
@@ -110,14 +111,14 @@ public class GUI extends JFrame {
             constraints.gridwidth = 1;
             constraints.fill = GridBagConstraints.BOTH;
             constraints.anchor = GridBagConstraints.LINE_START;
-            imageStart = new ImageIcon(this.getClass().getResource(""));
-            JLabel picLabel = new JLabel(imageStart);
-            start.add(picLabel);
+            //imageStart = new ImageIcon(this.getClass().getResource("/I_Know_That_Word/files/wordcloud.png"));
+            //JLabel picLabel = new JLabel(imageStart);
+            //start.add(picLabel);
 
             play = new JButton("Play");
             play.addActionListener(escucha);
             start.add(play);
-
+            //this.getContentPane().add(play, constraints);
             this.add(start, constraints);
         }
         //PANEL NOMBRE USUARIO
@@ -164,56 +165,56 @@ public class GUI extends JFrame {
 
             playerNameB.add(done);
 /**
-            playerNameu = new JPanel();
-            playerNameu.setBackground(Color.CYAN);
-            playerNameu.setPreferredSize(new Dimension(500, 120));
-            constraints.gridx = 0;
-            constraints.gridy = 2;
-            constraints.gridwidth = 3;
-            constraints.anchor = GridBagConstraints.PAGE_START;
-            this.add(playerNameu, constraints);
+ playerNameu = new JPanel();
+ playerNameu.setBackground(Color.CYAN);
+ playerNameu.setPreferredSize(new Dimension(500, 120));
+ constraints.gridx = 0;
+ constraints.gridy = 2;
+ constraints.gridwidth = 3;
+ constraints.anchor = GridBagConstraints.PAGE_START;
+ this.add(playerNameu, constraints);
 
-            playerNameC = new JPanel();
-            playerNameC.setBackground(Color.CYAN);
-            playerNameC.setPreferredSize(new Dimension(500, 120));
-            constraints.gridx = 0;
-            constraints.gridy = 3;
-            constraints.gridwidth = 3;
-            constraints.anchor = GridBagConstraints.CENTER;
-            this.add(playerNameC, constraints);
+ playerNameC = new JPanel();
+ playerNameC.setBackground(Color.CYAN);
+ playerNameC.setPreferredSize(new Dimension(500, 120));
+ constraints.gridx = 0;
+ constraints.gridy = 3;
+ constraints.gridwidth = 3;
+ constraints.anchor = GridBagConstraints.CENTER;
+ this.add(playerNameC, constraints);
 
-            user = new JLabel("Enter your name");
-            name = new JTextField(30);
+ user = new JLabel("Enter your name");
+ name = new JTextField(30);
 
-// Crear nuevas restricciones para los componentes de playerNameC
-            GridBagConstraints playerNameCConstraints = new GridBagConstraints();
-            playerNameCConstraints.gridx = 0;
-            playerNameCConstraints.gridy = 0;
-            playerNameCConstraints.anchor = GridBagConstraints.CENTER;
-            playerNameC.add(user, playerNameCConstraints);
+ // Crear nuevas restricciones para los componentes de playerNameC
+ GridBagConstraints playerNameCConstraints = new GridBagConstraints();
+ playerNameCConstraints.gridx = 0;
+ playerNameCConstraints.gridy = 0;
+ playerNameCConstraints.anchor = GridBagConstraints.CENTER;
+ playerNameC.add(user, playerNameCConstraints);
 
-            playerNameCConstraints.gridy = 1;
-            playerNameC.add(name, playerNameCConstraints);
+ playerNameCConstraints.gridy = 1;
+ playerNameC.add(name, playerNameCConstraints);
 
-            playerNameB = new JPanel();
-            playerNameB.setBackground(Color.CYAN);
-            playerNameB.setPreferredSize(new Dimension(500, 120));
-            constraints.gridx = 0;
-            constraints.gridy = 4;
-            constraints.gridwidth = 3;
-            constraints.anchor = GridBagConstraints.PAGE_END;
-            this.add(playerNameB, constraints);
+ playerNameB = new JPanel();
+ playerNameB.setBackground(Color.CYAN);
+ playerNameB.setPreferredSize(new Dimension(500, 120));
+ constraints.gridx = 0;
+ constraints.gridy = 4;
+ constraints.gridwidth = 3;
+ constraints.anchor = GridBagConstraints.PAGE_END;
+ this.add(playerNameB, constraints);
 
-            done = new JButton("Done");
-            done.addActionListener(escucha);
+ done = new JButton("Done");
+ done.addActionListener(escucha);
 
-// Crear nuevas restricciones para el botón en playerNameB
-            GridBagConstraints playerNameBConstraints = new GridBagConstraints();
-            playerNameBConstraints.gridx = 0;
-            playerNameBConstraints.gridy = 0;
-            playerNameBConstraints.anchor = GridBagConstraints.PAGE_END;
-            playerNameB.add(done, playerNameBConstraints);
-             */
+ // Crear nuevas restricciones para el botón en playerNameB
+ GridBagConstraints playerNameBConstraints = new GridBagConstraints();
+ playerNameBConstraints.gridx = 0;
+ playerNameBConstraints.gridy = 0;
+ playerNameBConstraints.anchor = GridBagConstraints.PAGE_END;
+ playerNameB.add(done, playerNameBConstraints);
+ */
 
         }
 
@@ -238,15 +239,15 @@ public class GUI extends JFrame {
             showHits.setSize(new Dimension(100, 30));
             showHits.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
 
-            //estadoActual.add(ayuda);
+            //level.add(helpButton);
             level.add(showName);
             level.add(showActualLevel);
             level.add(showHits);
-            //estadoActual.add(salir);
+            //level.add(exitButton);
 
             this.add(level, constraints);
         }
-            //PANEL MOSTRAR PALABRAS
+        //PANEL MOSTRAR PALABRAS
         {
             panelShowWordsU = new JPanel();
             panelShowWordsU.setBackground(Color.CYAN);
@@ -272,7 +273,7 @@ public class GUI extends JFrame {
             showWord.setSize(500, 500);
             panelShowWordsC.add(showWord);
 
-            showWord = new JLabel("Aquí se mostrarán las palabras");
+            showWord = new JLabel("Here the words will be displayed");
             showWord.setSize(500, 150);
             showWord.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
             showWord.setSize(500, 500);
@@ -299,7 +300,7 @@ public class GUI extends JFrame {
             panelShowWordsB.add(showWords);
 
         }
-            //PANEL SELECCIONAR PALABRAS
+        //PANEL SELECCIONAR PALABRAS
         {
             selectWordsU = new JPanel();
             selectWordsU.setBackground(Color.CYAN);
@@ -319,7 +320,7 @@ public class GUI extends JFrame {
 
             this.add(selectWordsC, constraints);
 
-            selectWords = new JLabel("¡Buena suerte!");
+            selectWords = new JLabel("¡Good luck!");
             selectWords.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
 
             selectWordsC.add(selectWords);
@@ -348,7 +349,7 @@ public class GUI extends JFrame {
 
         }
 
-            //PANEL RESULTADOS
+        //PANEL RESULTADOS
         {
             resultScreenSu = new JPanel();
             resultScreenSu.setBackground(Color.CYAN);
@@ -431,135 +432,109 @@ public class GUI extends JFrame {
         showTimer = new Timer(5000, escucha);
         selectTimer = new Timer(7000, escucha);
 
-        }
+    }
 
-        /**
-         * Dependiendo del porcentaje de aciertos, lanza el mensaje de resultados
-         */
+    /**
+     * Dependiendo del porcentaje de aciertos, lanza el mensaje de resultados
+     */
 
-        public void resultados()
-        {
-            if (model.LevelSucess())
-            {
-                if (actualLevel == 10)
-                {
-                    resultTextPane.setText("You have reached the maximum level, you can repeat it if you wish.");
-                    statisticsLabel.setText("Accuracy percentage: " + model.porcentaje + "%");
-                    restartLevelButton.setVisible(true);
-                    maximumLevelPassed = actualLevel;
-                }
-                else
-                {
-                    resultTextPane.setText("You have passed this level, you can proceed to the next level.");
-                    statisticsLabel.setText("Accuracy percentage: " + model.porcentaje + "%");
-                    nextLevelButton.setVisible(true);
-                    maximumLevelPassed = actualLevel;
-                    actualLevel = actualLevel + 1;
-                }
-            }
-            else
-            {
-                resultTextPane.setText("You have failed this level, you cannot proceed to the next level.");
+    public void resultados() {
+        if (model.LevelSucess()) {
+            if (actualLevel == 10) {
+                resultTextPane.setText("You have reached the maximum level, you can repeat it if you wish.");
+                statisticsLabel.setText("Accuracy percentage: " + model.porcentaje + "%");
                 restartLevelButton.setVisible(true);
+                maximumLevelPassed = actualLevel;
+            } else {
+                resultTextPane.setText("You have passed this level, you can proceed to the next level.");
+                statisticsLabel.setText("Accuracy percentage: " + model.porcentaje + "%");
+                nextLevelButton.setVisible(true);
+                maximumLevelPassed = actualLevel;
+                actualLevel = actualLevel + 1;
             }
+        } else {
+            resultTextPane.setText("You have failed this level, you cannot proceed to the next level.");
+            restartLevelButton.setVisible(true);
         }
-
-
-        public static void main(String[] args)
-        {
-            EventQueue.invokeLater(() ->
-            {
-                GUI gui = new GUI();
-                gui.pack();
+        /**
+         * Main process of the Java program
+         *
+         * @param args Object used in order to send input data from command line when
+         *             the program is execute by console.
+         */
+    }
+        public static void main (String[]args){
+            EventQueue.invokeLater(() -> {
+                GUI myProjectGUI = new GUI();
             });
         }
 
         /**
          * inner class that extends an Adapter Class or implements Listeners used by GUI class
          */
-        private class Escucha implements ActionListener
-        {
+        private class Escucha implements ActionListener {
             private int counter;
 
-            public Escucha()
-            {
+            public Escucha() {
                 counter = 0;
             }
 
             @Override
-            public void actionPerformed(ActionEvent e)
-            {
+            public void actionPerformed(ActionEvent e) {
 
-                if (e.getSource() == helpButton)
-                {
+                if (e.getSource() == helpButton) {
                     JOptionPane.showMessageDialog(null, "Este juego consiste en recordar las palabras mostradas y determinar si están en la siguiente aparición");
                 }
 
-                if (e.getSource() == exitButton)
-                {
-                    if (player.isNameEmpty(userName) == true)
-                    {
+                if (e.getSource() == exitButton) {
+                    if (player.isNameEmpty(userName) == true) {
                         System.exit(0);
-                    }
-                    else
-                    {
-                        if (player.isRegistered(userName) == true)
-                        {
+                    } else {
+                        if (player.isRegistered(userName) == true) {
                             player.updateUser(userName, maximumLevelPassed);
-                        } else
-                        {
+                        } else {
                             player.registerPlayer(userName, maximumLevelPassed);
                         }
                         System.exit(0);
                     }
                 }
 
-                if (e.getSource() == play)
-                {
+                if (e.getSource() == play) {
                     start.setVisible(false);
                     playerNameu.setVisible(true);
                     playerNameB.setVisible(true);
                     playerNameB.setVisible(true);
                 }
 
-                if (e.getSource() == done)
-                {
+                if (e.getSource() == done) {
 
                     System.out.println(actualLevel);
 
                     userName = name.getText().replaceAll("\\s+", "");
 
-                    if (player.isNameEmpty(userName) == false)
-                    {
-                        if (player.isRegistered(userName) == true)
-                        {
+                    if (player.isNameEmpty(userName) == false) {
+                        if (player.isRegistered(userName) == true) {
                             maximumLevelPassed = player.getLevel();
 
-                            if (maximumLevelPassed < 0 || maximumLevelPassed > 10)
-                            {
+                            if (maximumLevelPassed < 0 || maximumLevelPassed > 10) {
                                 JOptionPane.showMessageDialog(null, "Error de sistema.");
                                 System.exit(0);
                             }
 
-                            if (maximumLevelPassed == 10)
-                            {
+                            if (maximumLevelPassed == 10) {
                                 actualLevel = 10;
-                            }
-                            else
-                            {
+                            } else {
                                 actualLevel = maximumLevelPassed + 1;
                             }
                             JOptionPane.showMessageDialog(null, "Usted ya se encuentra registrado, su nivel máximo superado es: " + maximumLevelPassed);
-                        }
-                        else
-                        {
+                        } else {
                             actualLevel = 1;
                             maximumLevelPassed = 0;
                         }
 
-                        showName.setText("Usuario: " + userName);
-                        showActualLevel.setText("Nivel actual: " + actualLevel);
-                        showHits.setText("Aciertos: " + model.aciertos);
+                        showName.setText("User: " + userName);
+                        showActualLevel.setText("Actual Level: " + actualLevel);
+                        showHits.setText("Hits: " + model.aciertos);
 
                         playerNameu.setVisible(false);
                         playerNameC.setVisible(false);
@@ -569,15 +544,12 @@ public class GUI extends JFrame {
                         panelShowWordsU.setVisible(true);
                         panelShowWordsC.setVisible(true);
                         panelShowWordsB.setVisible(true);
-                    }
-                    else
-                    {
+                    } else {
                         JOptionPane.showMessageDialog(null, "El nombre es muy corto o está vacío");
                     }
                 }
 
-                if (e.getSource() == showWords)
-                {
+                if (e.getSource() == showWords) {
                     selectWords.setEnabled(false);
                     model.nivelPalabras(actualLevel);
                     palabrasLevel = model.getArrayPalabrasLevel();
@@ -588,8 +560,7 @@ public class GUI extends JFrame {
                     showTimer.start();
                 }
 
-                if (e.getSource() == continueGame)
-                {
+                if (e.getSource() == continueGame) {
                     panelShowWordsU.setVisible(false);
                     panelShowWordsC.setVisible(false);
                     panelShowWordsB.setVisible(false);
@@ -600,30 +571,25 @@ public class GUI extends JFrame {
                     selectTimer.start();
                 }
 
-                if (e.getSource() == yesButton)
-                {
+                if (e.getSource() == yesButton) {
                     yesButton.setEnabled(false);
                     noButton.setEnabled(false);
-                    if (model.palabraEstaEnNivel(word) == true)
-                    {
+                    if (model.palabraEstaEnNivel(word) == true) {
                         model.aciertos = model.aciertos + 1;
                     }
-                    showHits.setText("Aciertos: " + model.aciertos);
+                    showHits.setText("Hits: " + model.aciertos);
                 }
 
-                if (e.getSource() == noButton)
-                {
+                if (e.getSource() == noButton) {
                     noButton.setEnabled(false);
                     yesButton.setEnabled(false);
-                    if (model.palabraEstaEnNivel(word) == false)
-                    {
+                    if (model.palabraEstaEnNivel(word) == false) {
                         model.aciertos = model.aciertos + 1;
                     }
-                    showHits.setText("Aciertos: " + model.aciertos);
+                    showHits.setText("Hits: " + model.aciertos);
                 }
 
-                if (e.getSource() == nextLevelButton)
-                {
+                if (e.getSource() == nextLevelButton) {
                     resultScreenSu.setVisible(false);
                     resultScreenCe.setVisible(false);
                     resultScreenIn.setVisible(false);
@@ -634,14 +600,13 @@ public class GUI extends JFrame {
                     showWords.setEnabled(true);
                     continueGame.setEnabled(false);
                     model.aciertos = 0;
-                    showHits.setText("Aciertos: " + model.aciertos);
-                    showActualLevel.setText("Nivel actual: " + actualLevel);
+                    showHits.setText("Hits: " + model.aciertos);
+                    showActualLevel.setText("Actual level: " + actualLevel);
                     model.arrayPalabrasLevel.clear();
                     model.arrayPalabrasVistas.clear();
                 }
 
-                if (e.getSource() == restartLevelButton)
-                {
+                if (e.getSource() == restartLevelButton) {
                     resultScreenSu.setVisible(false);
                     resultScreenCe.setVisible(false);
                     resultScreenIn.setVisible(false);
@@ -652,43 +617,35 @@ public class GUI extends JFrame {
                     showWords.setEnabled(true);
                     continueGame.setEnabled(false);
                     model.aciertos = 0;
-                    showHits.setText("Aciertos: " + model.aciertos);
-                    showActualLevel.setText("Nivel actual: " + actualLevel);
+                    showHits.setText("Hits: " + model.aciertos);
+                    showActualLevel.setText("Actual level: " + actualLevel);
                     model.arrayPalabrasLevel.clear();
                     model.arrayPalabrasVistas.clear();
                 }
 
-                if (e.getSource() == showTimer)
-                {
+                if (e.getSource() == showTimer) {
 
-                    if (counter < model.palabrasVistas)
-                    {
+                    if (counter < model.palabrasVistas) {
                         showWord.setText(palabrasVistas.get(counter));
                         counter++;
-                    }
-                    else
-                    {
+                    } else {
                         showTimer.stop();
-                        showWord.setText("¡Buena suerte!");
+                        showWord.setText("¡Good luck!");
                         continueGame.setEnabled(true);
                         counter = 0;
                         model.estado = 1;
                     }
                 }
 
-                if (e.getSource() == selectTimer)
-                {
+                if (e.getSource() == selectTimer) {
                     yesButton.setEnabled(true);
                     noButton.setEnabled(true);
-                    if (counter < model.palabrasLevel)
-                    {
+                    if (counter < model.palabrasLevel) {
                         selectWords.setText(palabrasLevel.get(counter));
                         word = palabrasLevel.get(counter);
                         System.out.println(model.palabraEstaEnNivel(word));
                         counter++;
-                    }
-                    else
-                    {
+                    } else {
                         selectTimer.stop();
                         nextLevelButton.setVisible(false);
                         restartLevelButton.setVisible(false);
@@ -711,6 +668,7 @@ public class GUI extends JFrame {
             }
         }
     }
+
 
 
 
