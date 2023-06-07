@@ -9,16 +9,11 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.util.ArrayList;
 
-/**
- * This class is used for ...
- * @autor Carlos Felipe Montoya carlos.felipe.montoya@correounivalle.edu.co
- * @version v.1.0.0 date:21/03/2023
- */
-public class GUI extends JFrame {
+
+public class GUIGridBagLayout extends JFrame {
 
     private Header headerProject;
     private JTextPane resultTextPane;
-
     private JLabel statisticsLabel,user, showName, showActualLevel, showHits, showWord, selectWords;
     private JPanel upper,resultScreenIn, start, playerNameu, playerNameC, playerNameB, actualEstatus, panelShowWordsU, resultScreenCe, panelShowWordsC, panelShowWordsB, selectWordsU, resultScreenSu, selectWordsC, selectWordsB;
     private JTextField name;
@@ -26,7 +21,7 @@ public class GUI extends JFrame {
     private Timer showTimer, selectTimer;
     private Player player;
     private Model model;
-    private FileManager fileManager;
+
     private Escucha escucha;
     private Palabras palabras;
     private ArrayList<String> palabrasLevel, palabrasVistas;
@@ -40,12 +35,11 @@ public class GUI extends JFrame {
     /**
      * Constructor of GUI class
      */
-    public GUI() {
-        initGUI();
+    public GUIGridBagLayout() {
+        initGUIGridBagLayout();
 
         //Default JFrame configuration
         this.setTitle("I KNOW THAT WORD!");
-        this.setSize(300, 300);
         this.pack();
         this.setResizable(false);
         this.setVisible(true);
@@ -59,7 +53,7 @@ public class GUI extends JFrame {
      * This method is used to set up the default JComponent Configuration,
      * create Listener and control Objects used for the GUI class
      */
-    private void initGUI() {
+    private void initGUIGridBagLayout() {
         //Set up JFrame Container's Layout
         this.getContentPane().setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
@@ -67,7 +61,7 @@ public class GUI extends JFrame {
         //Create Listener Object and Control Object
         palabras = new Palabras();
         escucha = new Escucha();
-        fileManager = new FileManager();
+        //fileManager = new FileManager();
         player = new Player();
         model = new Model();
         //Set up JComponents
@@ -107,38 +101,39 @@ public class GUI extends JFrame {
             start.setPreferredSize(new Dimension(500, 360));
             constraints.gridx = 0;
             constraints.gridy = 1;
-            constraints.gridwidth = 1;
+            constraints.gridwidth = 3;
             constraints.fill = GridBagConstraints.BOTH;
             constraints.anchor = GridBagConstraints.LINE_START;
-            imageStart = new ImageIcon(this.getClass().getResource("/I_Know_That_Word/files/wordcloud.png"));
-            JLabel picLabel = new JLabel(imageStart);
-            start.add(picLabel);
+            //imageStart = new ImageIcon(this.getClass().getResource("/I_Know_That_Word/files/wordcloud.png"));
+            //JLabel picLabel = new JLabel(imageStart);
+            //start.add(picLabel);
 
             play = new JButton("Play");
             play.addActionListener(escucha);
             start.add(play);
             //this.getContentPane().add(play, constraints);
-            this.add(start, constraints);
+            this.add(start,constraints);
         }
         //PANEL NOMBRE USUARIO
 
         {
 
             playerNameu = new JPanel();
-            playerNameu.setBackground(Color.CYAN);
+            playerNameu.setBackground(Color.yellow);
             playerNameu.setPreferredSize(new Dimension(500, 120));
-            constraints.gridx = 0;
+            constraints.gridx = 1;
             constraints.gridy = 2;
-            constraints.gridwidth = 3;
+            constraints.gridwidth = 4;
             constraints.anchor = GridBagConstraints.PAGE_START;
+
             this.add(playerNameu, constraints);
 
             playerNameC = new JPanel();
-            playerNameC.setBackground(Color.CYAN);
+            playerNameC.setBackground(Color.green);
             playerNameC.setPreferredSize(new Dimension(500, 120));
-            constraints.gridx = 0;
+            constraints.gridx = 1;
             constraints.gridy = 3;
-            constraints.gridwidth = 3;
+            constraints.gridwidth = 4;
             constraints.anchor = GridBagConstraints.CENTER;
 
             this.add(playerNameC, constraints);
@@ -150,11 +145,11 @@ public class GUI extends JFrame {
             playerNameC.add(name);
 
             playerNameB = new JPanel();
-            playerNameB.setBackground(Color.CYAN);
+            playerNameB.setBackground(Color.blue);
             playerNameB.setPreferredSize(new Dimension(500, 120));
-            constraints.gridx = 0;
+            constraints.gridx = 1;
             constraints.gridy = 4;
-            constraints.gridwidth = 3;
+            constraints.gridwidth = 4;
             constraints.anchor = GridBagConstraints.PAGE_END;
 
             this.add(playerNameB, constraints);
@@ -199,7 +194,7 @@ public class GUI extends JFrame {
         //PANEL MOSTRAR PALABRAS
         {
             panelShowWordsU = new JPanel();
-            panelShowWordsU.setBackground(Color.CYAN);
+            panelShowWordsU.setBackground(Color.yellow);
             panelShowWordsU.setPreferredSize(new Dimension(500, 80));
             constraints.gridx = 0;
             constraints.gridy = 2;
@@ -229,7 +224,7 @@ public class GUI extends JFrame {
             panelShowWordsC.add(showWord);
 
             panelShowWordsB = new JPanel();
-            panelShowWordsB.setBackground(Color.CYAN);
+            panelShowWordsB.setBackground(Color.green);
             panelShowWordsB.setPreferredSize(new Dimension(500, 100));
             constraints.gridx = 0;
             constraints.gridy = 4;
@@ -408,16 +403,14 @@ public class GUI extends JFrame {
     }
     public static void main (String[]args){
             EventQueue.invokeLater(() -> {
-                GUI myProjectGUI = new GUI();
+                GUIGridBagLayout GUI = new GUIGridBagLayout();
             });
     }
 
     private class Escucha implements ActionListener {
         private int counter;
 
-        public Escucha() {
-            counter = 0;
-        }
+        public Escucha() { counter = 0;}
 
         public void actionPerformed(ActionEvent e) {
 
@@ -438,11 +431,10 @@ public class GUI extends JFrame {
                 }
             }
 
-
             if (e.getSource() == play) {
                 start.setVisible(false);
                 playerNameu.setVisible(true);
-                playerNameB.setVisible(true);
+                playerNameC.setVisible(true);
                 playerNameB.setVisible(true);
             }
 
@@ -515,7 +507,7 @@ public class GUI extends JFrame {
 
                 yesButton.setEnabled(false);
                 noButton.setEnabled(false);
-                if (model.palabraEstaEnNivel(word) == true) {
+                if (model.palabraEstaEnNivel(word)) {
                     model.aciertos = model.aciertos + 1;
                 }
                 showHits.setText("Hits: " + model.aciertos);
@@ -524,7 +516,7 @@ public class GUI extends JFrame {
             if (e.getSource() == noButton) {
                 noButton.setEnabled(false);
                 yesButton.setEnabled(false);
-                if (model.palabraEstaEnNivel(word) == false) {
+                if (!model.palabraEstaEnNivel(word)) {
                     model.aciertos = model.aciertos + 1;
                 }
                 showHits.setText("Hits: " + model.aciertos);
