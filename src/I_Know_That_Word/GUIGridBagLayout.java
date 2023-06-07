@@ -143,8 +143,12 @@ public class GUIGridBagLayout extends JFrame {
 
             playerNameC.add(user);
             playerNameC.add(name);
+            done = new JButton("Done");
+            done.addActionListener(escucha);
 
-            playerNameB = new JPanel();
+            playerNameC.add(done);
+
+            /**playerNameB = new JPanel();
             playerNameB.setBackground(Color.blue);
             playerNameB.setPreferredSize(new Dimension(500, 120));
             constraints.gridx = 1;
@@ -158,6 +162,7 @@ public class GUIGridBagLayout extends JFrame {
             done.addActionListener(escucha);
 
             playerNameB.add(done);
+             */
 
 
         }
@@ -362,7 +367,7 @@ public class GUIGridBagLayout extends JFrame {
         actualEstatus.setVisible(false);
         playerNameu.setVisible(false);
         playerNameC.setVisible(false);
-        playerNameB.setVisible(false);
+        //playerNameB.setVisible(false);
         panelShowWordsU.setVisible(false);
         panelShowWordsC.setVisible(false);
         panelShowWordsB.setVisible(false);
@@ -432,10 +437,10 @@ public class GUIGridBagLayout extends JFrame {
             }
 
             if (e.getSource() == play) {
-                start.setVisible(false);
-                playerNameu.setVisible(true);
-                playerNameC.setVisible(true);
-                playerNameB.setVisible(true);
+                start.setVisible(false);//cuando ocurre el evento en el boton play el Jpanel start se oculta
+                //playerNameu.setVisible(true);//cuando ocurre el evento en el boton play hace visible el panel playerNameu
+                playerNameC.setVisible(true);//cuando ocurre el evento en el boton play hace visible el panel playerNamec
+                //playerNameB.setVisible(true);//cuando ocurre el evento en el boton play hace visible el panel playerNameb
             }
 
             if (e.getSource() == done) {
@@ -470,7 +475,7 @@ public class GUIGridBagLayout extends JFrame {
 
                     playerNameu.setVisible(false);
                     playerNameC.setVisible(false);
-                    playerNameB.setVisible(false);
+                    //playerNameB.setVisible(false);
 
                     actualEstatus.setVisible(true);
                     panelShowWordsU.setVisible(true);
