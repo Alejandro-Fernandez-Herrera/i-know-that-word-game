@@ -2,10 +2,7 @@ package I_Know_That_Word; // This is the package where the class is located
 
 import java.io.*; // Import the java.io package to use the FileWriter and BufferedWriter classes
 import java.util.ArrayList; // Import the java.util package to use the ArrayList class
-import javax.sound.midi.SysexMessage;
-import javax.swing.*;
-import java.io.*;
-import java.util.ArrayList;
+
 /**
  * This class handles actions related to the player
  */
@@ -74,6 +71,8 @@ public class Player {
      * Registers the player in the Users.txt and Levels.txt files
      */
     public void registerPlayer(String name, int levelCleared) {
+        String user = name;
+        int level = levelCleared;
         try {
             fileWriter = new FileWriter("src/I_Know_That_Word/files/fileText.txt", true); // This method is in the FileWriter class
             output = new BufferedWriter(fileWriter);
@@ -110,9 +109,11 @@ public class Player {
      */
     public void updateUser(String name, int levelCleared) {
 
-        int indexToSave = userList.indexOf(name);
+        int indexToSave = 0;
+        String valueToUpdate;
+        indexToSave = userList.indexOf(name);
 
-        String valueToUpdate = String.valueOf(levelCleared);
+        valueToUpdate = String.valueOf(levelCleared);
 
         levelList.set(indexToSave, valueToUpdate);
 

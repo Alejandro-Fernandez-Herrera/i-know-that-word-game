@@ -1,4 +1,6 @@
 package I_Know_That_Word;
+
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -19,14 +21,14 @@ public class Model {
         palabra = new Palabras();
         palabrasLevel = 0;
         palabrasVistas = 0;
+        porcentaje = 0;
         estado = 0;
         aciertos = 0;
         aciertosNecesarios = 0;
-        porcentaje = 0;
-        bancoPalabras = new ArrayList<String>();
+        bancoPalabras = palabra.getPalabras();
         arrayPalabrasLevel = new ArrayList<String>();
         arrayPalabrasVistas = new ArrayList<String>();
-        bancoPalabras = palabra.getPalabras();
+
 
     }
 
@@ -85,11 +87,10 @@ public class Model {
                 palabrasLevel = 200;
                 aciertosNecesarios = 100;
                 break;
-            /**default:
+            default:
              JOptionPane.showMessageDialog(null, "Error de sistema.");
              System.exit(0);
              break;
-             */
 
         }
         return palabrasLevel;
