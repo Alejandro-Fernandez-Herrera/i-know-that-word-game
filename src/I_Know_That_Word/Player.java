@@ -74,7 +74,7 @@ public class Player {
         String user = name;
         int level = levelCleared;
         try {
-            fileWriter = new FileWriter("src/I_Know_That_Word/files/fileText.txt", true); // This method is in the FileWriter class
+            fileWriter = new FileWriter("src/I_Know_That_Word/files/Players.txt", true); // This method is in the FileWriter class
             output = new BufferedWriter(fileWriter);
             output.newLine();
             output.write(name);
@@ -118,7 +118,7 @@ public class Player {
         levelList.set(indexToSave, valueToUpdate);
 
         try {
-            fileWriter = new FileWriter("src/I_Know_That_Word/files/data.txt", false);
+            fileWriter = new FileWriter("src/I_Know_That_Word/files/fileText.txt", false);
             output = new BufferedWriter(fileWriter);
             for (int i = 0; i < levelList.toArray().length; i++) {
                 output.write(String.valueOf(levelList.get(i)));

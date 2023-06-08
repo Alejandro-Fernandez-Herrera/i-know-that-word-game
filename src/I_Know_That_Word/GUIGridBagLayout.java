@@ -61,14 +61,13 @@ public class GUIGridBagLayout extends JFrame {
         //Create Listener Object and Control Object
         palabras = new Palabras();
         escucha = new Escucha();
-        //fileManager = new FileManager();
         player = new Player();
         model = new Model();
         //Set up JComponents
 
         //PANEL SUPERIOR
         {
-            upper = new JPanel();
+            upper = new JPanel();//create the main panel
             upper.setBackground(Color.CYAN);
             upper.setPreferredSize(new Dimension(500, 40));
             constraints.gridx = 0;
@@ -77,7 +76,7 @@ public class GUIGridBagLayout extends JFrame {
             constraints.fill = GridBagConstraints.HORIZONTAL;
             constraints.anchor = GridBagConstraints.LINE_START;
 
-            helpButton = new JButton("HELP");
+            helpButton = new JButton("HELP");//create the HELP button
             helpButton.setPreferredSize(new Dimension(65, 30));
 
             helpButton.addActionListener(escucha);
@@ -87,7 +86,7 @@ public class GUIGridBagLayout extends JFrame {
             headerProject.setPreferredSize(new Dimension(350, 30));
             upper.add(headerProject);
 
-            exitButton = new JButton("EXIT");
+            exitButton = new JButton("EXIT");//Create the EXIT Button
             exitButton.setPreferredSize(new Dimension(65, 30));
             exitButton.addActionListener(escucha);
             upper.add(exitButton);
@@ -108,27 +107,16 @@ public class GUIGridBagLayout extends JFrame {
             //JLabel picLabel = new JLabel(imageStart);
             //start.add(picLabel);
 
-            play = new JButton("Play");
+            play = new JButton("Play");// create the Play button
             play.addActionListener(escucha);
             start.add(play);
-            //this.getContentPane().add(play, constraints);
             this.add(start,constraints);
         }
         //PANEL NOMBRE USUARIO
 
         {
 
-            playerNameu = new JPanel();
-            playerNameu.setBackground(Color.yellow);
-            playerNameu.setPreferredSize(new Dimension(500, 120));
-            constraints.gridx = 1;
-            constraints.gridy = 2;
-            constraints.gridwidth = 4;
-            constraints.anchor = GridBagConstraints.PAGE_START;
-
-            this.add(playerNameu, constraints);
-
-            playerNameC = new JPanel();
+            playerNameC = new JPanel();//panel para interacturar
             playerNameC.setBackground(Color.green);
             playerNameC.setPreferredSize(new Dimension(500, 120));
             constraints.gridx = 1;
@@ -138,31 +126,14 @@ public class GUIGridBagLayout extends JFrame {
 
             this.add(playerNameC, constraints);
 
-            user = new JLabel("Enter your name");
-            name = new JTextField(30);
+            user = new JLabel("Enter your name");//Create the label to write your playername
+            name = new JTextField(30);//descripción
 
             playerNameC.add(user);
             playerNameC.add(name);
             done = new JButton("Done");
             done.addActionListener(escucha);
-
             playerNameC.add(done);
-
-            /**playerNameB = new JPanel();
-            playerNameB.setBackground(Color.blue);
-            playerNameB.setPreferredSize(new Dimension(500, 120));
-            constraints.gridx = 1;
-            constraints.gridy = 4;
-            constraints.gridwidth = 4;
-            constraints.anchor = GridBagConstraints.PAGE_END;
-
-            this.add(playerNameB, constraints);
-
-            done = new JButton("Done");
-            done.addActionListener(escucha);
-
-            playerNameB.add(done);
-             */
 
 
         }
@@ -188,11 +159,11 @@ public class GUIGridBagLayout extends JFrame {
             showHits.setSize(new Dimension(100, 30));
             showHits.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
 
-            //level.add(helpButton);
+
             actualEstatus.add(showName);
             actualEstatus.add(showActualLevel);
             actualEstatus.add(showHits);
-            //level.add(exitButton);
+
 
             this.add(actualEstatus, constraints);
         }
@@ -283,12 +254,12 @@ public class GUIGridBagLayout extends JFrame {
 
             this.add(selectWordsB, constraints);
 
-            yesButton = new JButton("Sí");
+            yesButton = new JButton("YES");
             yesButton.setEnabled(false);
             yesButton.setPreferredSize(new Dimension(100, 30));
             yesButton.addActionListener(escucha);
 
-            noButton = new JButton("No");
+            noButton = new JButton("NO");
             noButton.setEnabled(false);
             noButton.setPreferredSize(new Dimension(100, 30));
             noButton.addActionListener(escucha);
@@ -365,9 +336,7 @@ public class GUIGridBagLayout extends JFrame {
         upper.setVisible(true);
         start.setVisible(true);
         actualEstatus.setVisible(false);
-        playerNameu.setVisible(false);
         playerNameC.setVisible(false);
-        //playerNameB.setVisible(false);
         panelShowWordsU.setVisible(false);
         panelShowWordsC.setVisible(false);
         panelShowWordsB.setVisible(false);
@@ -411,16 +380,26 @@ public class GUIGridBagLayout extends JFrame {
                 GUIGridBagLayout GUI = new GUIGridBagLayout();
             });
     }
-
+    /**
+     * The Escucha class implements the ActionListener interface and handles various actions
+     * triggered by buttons in the game.
+     */
     private class Escucha implements ActionListener {
         private int counter;
-
+        /**
+         * Constructs an Escucha object and initializes the counter to 0.
+         */
         public Escucha() { counter = 0;}
 
+        /**
+         * Handles the action events generated by buttons.
+         *
+         * @param e The ActionEvent object representing the action performed.
+         */
         public void actionPerformed(ActionEvent e) {
 
             if (e.getSource() == helpButton) {
-                    JOptionPane.showMessageDialog(null, "Este juego consiste en recordar las palabras mostradas y determinar si están en la siguiente aparición");
+                    JOptionPane.showMessageDialog(null, "This game involves remembering the displayed words and determining if they appear in the subsequent presentation.");
             }
 
             if (e.getSource() == exitButton) {
@@ -438,9 +417,8 @@ public class GUIGridBagLayout extends JFrame {
 
             if (e.getSource() == play) {
                 start.setVisible(false);//cuando ocurre el evento en el boton play el Jpanel start se oculta
-                //playerNameu.setVisible(true);//cuando ocurre el evento en el boton play hace visible el panel playerNameu
                 playerNameC.setVisible(true);//cuando ocurre el evento en el boton play hace visible el panel playerNamec
-                //playerNameB.setVisible(true);//cuando ocurre el evento en el boton play hace visible el panel playerNameb
+
             }
 
             if (e.getSource() == done) {
@@ -454,7 +432,7 @@ public class GUIGridBagLayout extends JFrame {
                         maximumLevelPassed = player.getLevel();
 
                         if (maximumLevelPassed < 0 || maximumLevelPassed > 10) {
-                            JOptionPane.showMessageDialog(null, "Error de sistema.");
+                            JOptionPane.showMessageDialog(null, "System error");
                             System.exit(0);
                         }
 
@@ -463,7 +441,7 @@ public class GUIGridBagLayout extends JFrame {
                         } else {
                             actualLevel = maximumLevelPassed + 1;
                         }
-                        JOptionPane.showMessageDialog(null, "Usted ya se encuentra registrado, su nivel máximo superado es: " + maximumLevelPassed);
+                        JOptionPane.showMessageDialog(null, "You are already registered, your highest level achieved is: " + maximumLevelPassed);
                     } else {
                         actualLevel = 1;
                         maximumLevelPassed = 0;
@@ -473,16 +451,16 @@ public class GUIGridBagLayout extends JFrame {
                     showActualLevel.setText("Actual Level: " + actualLevel);
                     showHits.setText("Hits: " + model.aciertos);
 
-                    playerNameu.setVisible(false);
+
                     playerNameC.setVisible(false);
-                    //playerNameB.setVisible(false);
+
 
                     actualEstatus.setVisible(true);
                     panelShowWordsU.setVisible(true);
                     panelShowWordsC.setVisible(true);
                     panelShowWordsB.setVisible(true);
                 } else {
-                    JOptionPane.showMessageDialog(null, "El nombre es muy corto o está vacío");
+                    JOptionPane.showMessageDialog(null, "The name is to short or empty");
                 }
             }
 
@@ -495,6 +473,7 @@ public class GUIGridBagLayout extends JFrame {
                 System.out.println(palabrasVistas + "" + palabrasVistas.toArray().length);
                 counter = 0;
                 showTimer.start();
+                showWords.setVisible(false);// oculta el boton start luego de iniciar el juego
             }
 
             if (e.getSource() == continueGame) {
@@ -534,7 +513,7 @@ public class GUIGridBagLayout extends JFrame {
                 panelShowWordsU.setVisible(true);
                 panelShowWordsC.setVisible(true);
                 panelShowWordsB.setVisible(true);
-                showWord.setText("Aquí se mostrarán las palabras");
+                showWord.setText("Here the words will be displayed");
                 showWords.setEnabled(true);
                 continueGame.setEnabled(false);
                 model.aciertos = 0;
@@ -551,7 +530,7 @@ public class GUIGridBagLayout extends JFrame {
                 panelShowWordsU.setVisible(true);
                 panelShowWordsC.setVisible(true);
                 panelShowWordsB.setVisible(true);
-                showWord.setText("Aquí se mostrarán las palabras");
+                showWord.setText("Here the words will be displayed");
                 showWords.setEnabled(true);
                 continueGame.setEnabled(false);
                 model.aciertos = 0;

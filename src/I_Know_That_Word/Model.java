@@ -2,7 +2,7 @@ package I_Know_That_Word;
 
 import javax.swing.*;
 import java.util.ArrayList;
-import java.util.Collections;
+
 
 
 /**
@@ -33,7 +33,7 @@ public class Model {
     }
 
     /**
-     * metodos
+     * Establece las condiciones de cada nivel
      */
     public int nivelPalabras(int nivelxJugar) {
         switch (nivelxJugar) {

@@ -1,11 +1,2 @@
-ad
-12
 
-hello
-0
-hey
-0
-maquina
-0
-maquina
-1
+2
